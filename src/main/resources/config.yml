@@ -1,0 +1,18 @@
+# 插件所使用的语言
+lang: 'zh_CN'
+
+database:
+  # 是否启用数据库配置，如果为false则为本地配置
+  enable: false
+  # 如果不清楚不需要改此条
+  class: 'com.mysql.jdbc.Driver'
+  # 数据库名
+  database: 'passcard'
+  # 表名
+  table: 'config'
+  # 用户名
+  user: 'root'
+  # 密码
+  password: 'root'
+  # 表前缀
+  prefix: 'pc_'

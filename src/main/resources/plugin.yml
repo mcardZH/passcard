@@ -1,0 +1,106 @@
+name: PassCard
+version: ${project.version}
+main: vip.onetool.passcard.PassCardPlugin
+load: STARTUP
+softdepend:
+  - PlaceholderAPI
+  - Value
+  - PlayerPoints
+author: mcard
+
+commands:
+  passcard:
+    usage: '§cUse /passcard help for help'
+    description: 'Copyright 2020-2021, power by mcard.'
+    permission-message: '§c对不起，你没有执行此命令的权限'
+
+permissions:
+  passcard.*:
+    default: op
+  passcard.help:
+    default: true
+    description: '查看与玩家相关的帮助'
+  passcard.help-op:
+    default: true
+    description: '查看所有帮助'
+  passcard.reward:
+    default: op
+    description: '完成任务获取奖励'
+    children:
+      passcard.reward.free.*:
+        default: true
+        description: '免费列表'
+      passcard.reward.pro.*:
+        default: op
+        description: '付费列表'
+  passcard.create:
+    default: op
+    description: '创建一个任务'
+  passcard.edit:
+    default: op
+    description: '编辑一个任务'
+  passcard.delete:
+    default: op
+    description: '删除一个任务'
+  passcard.start:
+    default: op
+    description: '开始一个新的赛季'
+  passcard.new:
+    default: op
+    description: '创建或编辑一个赛季'
+  passcard.level:
+    default: op
+    children:
+      passcard.level.self:
+        default: true
+        description: '查看自己的等级'
+      passcard.level.other:
+        default: true
+        description: '查看别人的等级'
+      passcard.level.change:
+        default: op
+        description: '修改等级'
+  passcard.finish:
+    default: op
+    description: '完成任务'
+    children:
+      passcard.finish.daily:
+        default: op
+        description: '每日任务'
+        children:
+          passcard.finish.daily.5:
+            default: true
+            description: '每日完成可完成5个'
+          passcard.finish.daily.unlimited:
+            default: op
+            description: '每日任务完成数量没有限制'
+      passcard.finish.weekly:
+        default: op
+        description: '每周任务'
+        children:
+          passcard.finish.weekly.5:
+            default: true
+            description: '每周任务可完成5个'
+          passcard.finish.weekly.unlimited:
+            default: op
+            description: '每周任务完成数量没有限制'
+      passcard.finish.monthly:
+        default: op
+        description: '每月任务'
+        children:
+          passcard.finish.monthly.5:
+            default: true
+            description: '每月任务可完成5个'
+          passcard.finish.monthly.unlimited:
+            default: op
+            description: '每月任务完成数量没有限制'
+      passcard.finish.jump:
+        default: true
+        description: '跳过任务'
+        children:
+          passcard.finish.jump.3:
+            default: true
+            description: '每日跳过3个任务'
+      passcard.finish.done:
+        default: op
+        description: '立即完成任务'

@@ -1,0 +1,223 @@
+# 文件名说明：本文名需要和文件夹名称相同
+# 请不要开始本赛季，本文件仅用于作为配置说明！请重新创建一个新的赛季
+
+# 赛季名称
+name: '模板赛季'
+# 赛季自动结束时间，结束后的赛季未领取的奖励将无法领取
+# 此设置不影响/passcard start <赛季名>立即启动新赛季
+end-time: '2022/02/22'
+# 本赛季需要加载的任务
+# * 代表所有
+load-list: '*'
+# 也可以单独加载
+#  - 'demo_task.yml'
+
+# 奖励列表
+reward-list:
+  # 等级1
+  1:
+    # 付费（领取此列表需要权限passcard.reward.pro.demo，demo为赛季名）
+    pro:
+      # 展示的提示
+      display:
+        # 类型
+        type: 'DIAMOND_PICKAXE'
+        # 数量
+        amount: 1
+        # 物品损伤值
+        damage: 0
+        # 名称
+        name: '&9■&a等级 &a&lI&9■'
+        # 物品lore
+        lore:
+          - '&9■■■■■■■■■■■■■■■■■■■■'
+          - '&4效率镐 Ⅹ * 1'
+          - '&a金币 * 1000'
+          - '&9■■■■■■■■■■■■■■■■■■■■'
+        # 附魔属性
+        enchantments:
+          # 附魔类型名称|附魔等级
+          - 'DIG_SPEED|10'
+          - 'DURABILITY|5'
+        # 是否可破坏
+        unbreakable: false
+      # 奖励内容
+      reward:
+        # 金钱，前置Value
+        money: 1000
+        # 物品，无需前置
+        item:
+          # 类型
+          type: 'DIAMOND_PICKAXE'
+          # 数量
+          amount: 1
+          # 物品损伤值
+          damage: 0
+          # 名称
+          name: '&9■&a等级 &a&lI&9■'
+          # 物品lore
+          lore:
+            - '&9■■■■■■■■■■■■■■■■■■■■'
+            - '&4效率镐 Ⅹ * 1'
+            - '&a金币 * 1000'
+            - '&9■■■■■■■■■■■■■■■■■■■■'
+          # 附魔属性
+          enchantments:
+            # 附魔类型名称|附魔等级
+            - 'DIG_SPEED|10'
+            - 'DURABILITY|5'
+          # 是否可破坏
+          unbreakable: false
+    # 免费（领取此列表需要权限passcard.reward.free.demo，demo为赛季名）
+    free:
+      display:
+        # 不是每一个值都必须要输入
+        type: 'GOLD_NUGGET'
+        name: '&9■&a等级 &a&lI&9■'
+        lore:
+          - '&9■■■■■■■■■■■■■■■■■■■■'
+          - '&a金币 * 1000'
+          - '&9■■■■■■■■■■■■■■■■■■■■'
+      reward:
+        money: 1000
+    # 到达此等级需要完成多少任务（注意，是达到上一个等级后还需要完成多少个）
+    task-needed: 1
+  2:
+    pro:
+      display:
+        type: 'DIAMOND_PICKAXE'
+        name: '&9■&a等级 &a&lII&9■'
+        lore:
+          - '&9■■■■■■■■■■■■■■■■■■■■'
+          - '&4点券 * 100'
+          - '&9■■■■■■■■■■■■■■■■■■■■'
+      reward:
+        # 点券，前置PlayerPoints
+        points: 100
+    # 如果该等级没有奖励，无需些此字段
+    # free:
+    task-needed: 3
+  3:
+    pro:
+      display:
+        type: 'PAPER'
+        name: '&9■&a等级 &a&lIII&9■'
+        lore:
+          - '&9■■■■■■■■■■■■■■■■■■■■'
+          - '&4MVP * 3天'
+          - '&9■■■■■■■■■■■■■■■■■■■■'
+        enchantments:
+          - 'LOOT_BONUS_MOBS|1'
+      reward:
+        # 命令，无需前置；由玩家以OP权限执行
+        # %0代表玩家名称
+        # 请自行参考自己的权限组插件，我这里的例子是LuckPerms
+        command: 'lp user %0 permission settemp mvp true 3d'
+    free:
+      display:
+        type: 'PAPER'
+        name: '&9■&a等级 &a&lIII&9■'
+        lore:
+          - '&9■■■■■■■■■■■■■■■■■■■■'
+          - '&aVIP * 1天'
+          - '&9■■■■■■■■■■■■■■■■■■■■'
+      reward:
+        command: 'lp user %0 permission settemp vip true 1d'
+    task-needed: 5
+  4:
+    pro:
+      display:
+        type: 'GOLD_ORE'
+        name: '&9■&a等级 &a&lIV&9■'
+        lore:
+          - '&9■■■■■■■■■■■■■■■■■■■■'
+          - '&a煤炭块 * 128'
+          - '&a铁矿石 * 320'
+          - '&a金矿石 * 160'
+          - '&a红石矿 * 96'
+          - '&a青金石矿 * 64'
+          - '&b钻石矿 * 32'
+          - '&b绿宝石矿 * 16'
+          - '&9■■■■■■■■■■■■■■■■■■■■'
+          - '&4提示：请准备足够的背包空间，如果装不下会掉落在地上，如果被人捡走了不做补偿'
+      reward:
+        # 多个重复的参数，可以在最后加“-标识符”，标识符可以自定义，但是标识符中不能有“-”
+        item-coal:
+          type: 'COAL_BLOCK'
+          amount: 128
+        item-iron_ore:
+          type: 'IRON_ORE'
+          amount: 320
+        item-gold_ore:
+          type: 'GOLD_ORE'
+          amount: 160
+        item-redstone_ore:
+          type: 'REDSTONE_ORE'
+          amount: 96
+        item-lapis_ore:
+          type: 'LAPIS_ORE'
+          amount: 64
+        item-diamond_ore:
+          type: 'DIAMOND_ORE'
+          amount: 32
+        item-emerald_ore:
+          type: 'EMERALD_ORE'
+          amount: 16
+    task-needed: 7
+  5:
+    pro:
+      display:
+        type: 'GRASS'
+        amount: 3
+        name: '&9■&a等级 &a&lV&9■'
+        lore:
+          - '&9■■■■■■■■■■■■■■■■■■■■'
+          - '&b地皮 * 3'
+          - '&9■■■■■■■■■■■■■■■■■■■■'
+      reward:
+        command-get_1: 'pl auto'
+        command-get_2: 'pl auto'
+        command-get_3: 'pl auto'
+    free:
+      display:
+        type: 'GRASS'
+        name: '&9■&a等级 &a&lV&9■'
+        lore:
+          - '&9■■■■■■■■■■■■■■■■■■■■'
+          - '&a地皮 * 1'
+          - '&9■■■■■■■■■■■■■■■■■■■■'
+      reward:
+        command: 'pl auto'
+    task-needed: 9
+  6:
+    pro:
+      display:
+        type: 'STONE'
+        name: '&9■&a等级 &a&lVI&9■'
+      reward:
+        command: 'say 后面我就不编了，搞几个占位置让他能翻页查看效果'
+    task-needed: 1
+  7:
+    pro:
+      display:
+        type: 'STONE'
+        name: '&9■&a等级 &a&lVII&9■'
+      reward:
+        command: 'say 后面我就不编了，搞几个占位置让他能翻页查看效果'
+    task-needed: 1
+  8:
+    pro:
+      display:
+        type: 'STONE'
+        name: '&9■&a等级 &a&lVIII&9■'
+      reward:
+        command: 'say 后面我就不编了，搞几个占位置让他能翻页查看效果'
+    task-needed: 1
+  9:
+    pro:
+      display:
+        type: 'STONE'
+        name: '&9■&a等级 &a&lIX&9■'
+      reward:
+        command: 'say 后面我就不编了，搞几个占位置让他能翻页查看效果'
+    task-needed: 1

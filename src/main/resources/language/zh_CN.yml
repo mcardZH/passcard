@@ -1,0 +1,117 @@
+command-help:
+  help:
+    # 有passcard.help权限的
+    no-op:
+      - '&6[&3通行证&6]&9&l/passcard&2打开自己的通行证面板'
+      - '&6[&3通行证&6]&9&l/passcard level &1<玩家名>&2查看别人的当前等级'
+      - '&6[&3通行证&6]&9&l/passcard jump&2跳过当前追踪的任务，重新获取一个新的'
+    # 有passcard.help-op权限的
+    op:
+      - '&9&l==========&6[&3通行证管理员帮助&6]&9&l=========='
+      - '&6[&3通行证&6]&9&l/passcard&2打开自己的通行证面板'
+      - '&6[&3通行证&6]&9&l/passcard help &1<子命令名>&2查看指令帮助'
+      - '&6[&3通行证&6]&9&l/passcard create &1<任务名>&2创建一个任务'
+      - '&6[&3通行证&6]&9&l/passcard edit &1<任务名>&2编辑一个任务'
+      - '&6[&3通行证&6]&9&l/passcard delete &1<任务名>&2删除一个任务'
+      - '&6[&3通行证&6]&9&l/passcard start &1<新赛季名>&2慎用！请确保已经完成新赛季配置。未领取的奖励将无法再领取。'
+      - '&6[&3通行证&6]&9&l/passcard new &1<新赛季名>&2创建一个新赛季或进入赛季编辑'
+      - '&6[&3通行证&6]&9&l/passcard level <add|reduce|set> &1<玩家名> <xp|level> <值>&2增加、减少和设置一个玩家的经验或等级'
+      - '&6[&3通行证&6]&9&l/passcard jump&2跳过当前追踪的任务，重新获取一个新的'
+      - '&6[&3通行证&6]&9&l/passcard done&2立即完成当前追踪的任务'
+      - '&9&l==========&6[&3通行证管理员帮助&6]&9&l=========='
+    # 详细提示内容
+    sub:
+      help:
+        - '&6[&3通行证&6]&9&l/passcard help &1<子命令名>'
+        - '&6[&3通行证&6]&a参数1：&1<子命令名>'
+        - '&6[&3通行证&6]&2可选常量：help、create、edit、delete、start、level、jump、done'
+        - '&6[&3通行证&6]&8例如/passcard help create'
+        - '&6[&3通行证&6]&a权限 &9&npasscard.help &a查看普通玩家帮助权限'
+        - '&6[&3通行证&6]&a权限 &9&npasscard.help-op &a查看op用户帮助权限'
+      create:
+        - '&6[&3通行证&6]&9&l/passcard create &1<任务名>'
+        - '&6[&3通行证&6]&a参数1：&1<任务名>'
+        - '&6[&3通行证&6]&2任务名必须&2&l唯一&2，建议使用英文作为任务名。任务中文名称可以稍后修改'
+        - '&6[&3通行证&6]&8例如/passcard create daily-online-for-30-min'
+        - '&6[&3通行证&6]&a权限 &9&npasscard.create &a创建任务'
+      edit:
+        - '&6[&3通行证&6]&9&l/passcard edit &1<任务名>'
+        - '&6[&3通行证&6]&a参数1：&1<任务名>'
+        - '&6[&3通行证&6]&2任务名必须&2&l存在&2，请参考&2&lplugins/PassCard/tasks/&2目录下对应文件名'
+        - '&6[&3通行证&6]&8例如/passcard edit daily-online-for-30-min'
+        - '&6[&3通行证&6]&a权限 &9&npasscard.edit &a编辑任务'
+      delete:
+        - '&6[&3通行证&6]&9&l/passcard delete &1<任务名>'
+        - '&6[&3通行证&6]&a参数1：&1<任务名>'
+        - '&6[&3通行证&6]&2任务名必须&2&l存在&2，请参考&2&lplugins/PassCard/tasks/&2目录下对应文件名'
+        - '&6[&3通行证&6]&c警告 删除是从硬盘、数据库上直接删除对应内容'
+        - '&6[&3通行证&6]&c警告 删除会立刻导致任务失效，追踪此任务的玩家会立刻丢失追踪目标'
+        - '&6[&3通行证&6]&8例如/passcard delete daily-online-for-30-min'
+        - '&6[&3通行证&6]&a权限 &9&npasscard.delete &a删除任务'
+      start:
+        - '&6[&3通行证&6]&9&l/passcard start &1<赛季名>'
+        - '&6[&3通行证&6]&a参数1：&1<赛季名>'
+        - '&6[&3通行证&6]&2赛季必须&2&l存在&2，请参考&2&lplugins/PassCard/seasons/&2目录下对应目录'
+        - '&6[&3通行证&6]&8例如/passcard start new_season'
+        - '&6[&3通行证&6]&a权限 &9&npasscard.start &a开始新赛季'
+      new:
+        - '&6[&3通行证&6]&9&l/passcard new &1<赛季名>'
+        - '&6[&3通行证&6]&a参数名1：&1<赛季名>'
+        - '&6[&3通行证&6]&2赛季创建、编辑一个赛季'
+        - '&6[&3通行证&6]&8例如/passcard new new_season'
+        - '&6[&3通行证&6]&a权限 &9&npasscard.new &a创建或编辑赛季'
+      level-op:
+        - '&6[&3通行证&6]&9&l/passcard level &1<add|reduce|set> <玩家名> <xp|level> <值>'
+        - '&6[&3通行证&6]&a参数名1：&1add:增加 &a| &1reduce:减少 &a| &1set:设置'
+        - '&6[&3通行证&6]&a参数名2：&1<玩家名>'
+        - '&6[&3通行证&6]&a参数名3：&1xp:完成数量 &a| &1level:等级'
+        - '&6[&3通行证&6]&a参数名4：&1<值>'
+        - '&6[&3通行证&6]&2直接修改玩家的任务完成数量和等级'
+        - '&6[&3通行证&6]&8例如/passcard level add mcard level 1'
+        - '&6[&3通行证&6]&a权限 &9&npasscard.level.change &a创建或编辑赛季'
+        - '&6[&3通行证&6]&c--------------------'
+        - '&6[&3通行证&6]&9&l/passcard level &1[玩家名]'
+        - '&6[&3通行证&6]&a参数名1：&1[玩家名]'
+        - '&6[&3通行证&6]&2玩家名如果忽略则为自身'
+        - '&6[&3通行证&6]&8例如/passcard level mcard'
+        - '&6[&3通行证&6]&a权限 &9&npasscard.level.self &a查看自身等级'
+        - '&6[&3通行证&6]&a权限 &9&npasscard.level.other &a查看他人等级'
+      level-no-op:
+        - '&6[&3通行证&6]&9&l/passcard level &1[玩家名]'
+        - '&6[&3通行证&6]&a参数名1：&1[玩家名]'
+        - '&6[&3通行证&6]&2玩家名如果忽略则为自身'
+        - '&6[&3通行证&6]&8例如/passcard level mcard'
+      jump-op:
+        - '&6[&3通行证&6]&9&l/passcard jump'
+        - '&6[&3通行证&6]&2直接跳过当前追踪的任务，可能要花费一定的代价（具体看设置）'
+        - '&6[&3通行证&6]&8例如/passcard jump'
+        - '&6[&3通行证&6]&a权限 &9&npasscard.finish.jump &a允许跳过任务'
+        - '&6[&3通行证&6]&a权限 &9&npasscard.finish.jump.* &a每天跳过 * 个任务（默认是3）'
+      jump-no-op:
+        - '&6[&3通行证&6]&9&l/passcard jump'
+        - '&6[&3通行证&6]&2直接跳过当前追踪的任务'
+        - '&6[&3通行证&6]&8例如/passcard jump'
+      done:
+        - '&6[&3通行证&6]&9&l/passcard done'
+        - '&6[&3通行证&6]&2立即完成当前追踪的任务'
+        - '&6[&3通行证&6]&8例如/passcard done'
+        - '&6[&3通行证&6]&a权限 &9&npasscard.finish.done &a立即完成任务'
+      default:
+        - '&6[&3通行证&6]&c未知指令 &4&l%0 &c请检查输入的指令'
+        - '&6[&3通行证&6]&8使用 &8&l/passcard help &9查看帮助'
+      unknown-arguments:
+        - '&6[&3通行证&6]&c无效参数 &4&l%0 &c请检查输入的指令'
+        - '&6[&3通行证&6]&8使用 &8&l/passcard help %0 &8查看帮助'
+  create:
+    name-exist: '&6[&3通行证&6]&c任务 &c&n%0&c 已经存在，请检查输入'
+    create-result: '&6[&3通行证&6]&a创建任务 %0'
+  edit:
+    name-not-exist: '&6[&3通行证&6]&c任务 &c&n%0&c 不存在，请检查输入'
+    only-player: '&6[&3通行证&6]&c本命令仅限玩家执行'
+  delete:
+    name-not-exist: '&6[&3通行证&6]&c任务 &c&n%0&c 不存在，请检查输入'
+  start:
+    name-not-exist: '&6[&3通行证&6]&c赛季 &c&n%0&c 不存在，请检查输入'
+    confirm-tip: '&6[&3通行证&6]&a请在 &a&l%0 &a秒内重新输入 &a&l%1 &a确认开启新赛季'
+    contain-data: '&6[&3通行证&6]&c警告！赛季 &c&n%0&c 存在数据，可能此赛季已经开始过'
+  argument-error: '&6[&3通行证&6]&c参数错误，请使用&c&l/passcard help %0&c查看帮助'
