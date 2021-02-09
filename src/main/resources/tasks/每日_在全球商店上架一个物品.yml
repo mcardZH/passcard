@@ -1,0 +1,24 @@
+# 无需在标题设置颜色，提示任务类型
+name: '在全球市场上架一个物品'
+# daily(每日)，weekly(每周)，monthly(每月)；其他值将导致此文件不加载
+type: 'daily'
+# 描述内容
+description:
+  - '&9■ &a大地同方，天空同圆'
+  - '&9□ &8/qs sell [价格] [数量] 把手上的东西上架市场'
+
+# 完成条件
+conditions:
+  1:
+    type: 'COMMAND'
+    values:
+      command-qs: 'qs sell'
+    tip: '&9/qs sell [价格] [数量] 把手上的东西上架市场'
+  2:
+    type: 'SEND-MESSAGE-TO-PLAYER'
+    values:
+      # 完成任务需要匹配到的正则表达式
+      pattern: '§a上架成功'
+    tip: '&9/qs sell [价格] [数量] 把手上的东西上架市场'
+
+tip: '&a任务 %passcard_current_name% 已经完成，使用 &a&l/passcard &a追踪其他任务'

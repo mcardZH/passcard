@@ -56,7 +56,7 @@ public final class PassCardPlugin extends JavaPlugin {
         File taskFolder = new File(getDataFolder(), "tasks");
         if (!taskFolder.exists()) {
             taskFolder.mkdirs();
-            saveResource("tasks/每日在线30分钟.yml", true);
+            saveResource("tasks/每日_在线30分钟.yml", true);
 
         }
         //ConditionManager.init();
