@@ -1,8 +1,10 @@
 package vip.onetool.pass.card.conditions;
 
 import org.bukkit.entity.Player;
+import vip.onetool.pass.card.util.SqlYmlConfigurationUtils;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -11,6 +13,16 @@ import java.util.Set;
  */
 public class ConditionManager {
 
+    private static boolean inited = false;
+
+    public static void init(List<SqlYmlConfigurationUtils> config) {
+        inited = true;
+
+    }
+
+    public static void unInit() {
+        inited = false;
+    }
 
     public static Set<String> getConditionNameList() {
         return new HashSet<>();

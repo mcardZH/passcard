@@ -1,0 +1,111 @@
+# 无需在标题设置颜色，提示任务类型
+name: '完成副本5次'
+# daily(每日)，weekly(每周)，monthly(每月)；其他值将导致此文件不加载
+type: 'weekly'
+# 描述内容
+description:
+  - '&9■ &a完成 &a&l任意&a 副本5次'
+  # 这只是个模板，服务器可能没有/fb这个命令
+  - '&9□ &8使用/fb查看可加入的副本'
+
+# 完成条件
+conditions:
+  # 先分析应该如何设置这个任务
+  # 如果没有现成的条件可用，可以组合使用多个条件
+  # 比如这个：
+  # 1、到达副本的终点
+  # 2、离开副本区域
+  # 3、再次到达副本终点
+  # 4、......
+  # 重复此步骤即可
+
+  # 第1步
+  1:
+    # 到达某个区域
+    type: 'GO-TO-RANGE'
+    values:
+      dungeon1:
+        world: 'world'
+        x1: 310.0
+        y1: 0.0
+        z1: 310.0
+        x2: 320.0
+        y2: 255.0
+        z2: 320.0
+      dungeon2:
+        world: 'world'
+        x1: 330.0
+        y1: 0.0
+        z1: 330.0
+        x2: 340.0
+        y2: 255.0
+        z2: 340.0
+    # 展示此提示对应变量 %passcard_current_tip%
+    tip: '&9完成 &9&l任意&9 副本0/5次'
+  2:
+    # 离开区域
+    type: 'LEAVE_RANGE'
+    values:
+      dungeon1:
+        world: 'world'
+        x1: 310.0
+        y1: 0.0
+        z1: 310.0
+        x2: 320.0
+        y2: 255.0
+        z2: 320.0
+      dungeon2:
+        world: 'world'
+        x1: 330.0
+        y1: 0.0
+        z1: 330.0
+        x2: 340.0
+        y2: 255.0
+        z2: 340.0
+    tip: '&9完成 &9&l任意&9 副本0/5次'
+  3:
+    # 到达某个区域
+    type: 'GO-TO-RANGE'
+    values:
+      dungeon1:
+        world: 'world'
+        x1: 310.0
+        y1: 0.0
+        z1: 310.0
+        x2: 320.0
+        y2: 255.0
+        z2: 320.0
+      dungeon2:
+        world: 'world'
+        x1: 330.0
+        y1: 0.0
+        z1: 330.0
+        x2: 340.0
+        y2: 255.0
+        z2: 340.0
+    tip: '&9完成 &9&l任意&9 副本1/5次'
+  4:
+    # 离开区域
+    type: 'LEAVE_RANGE'
+    values:
+      dungeon1:
+        world: 'world'
+        x1: 310.0
+        y1: 0.0
+        z1: 310.0
+        x2: 320.0
+        y2: 255.0
+        z2: 320.0
+      dungeon2:
+        world: 'world'
+        x1: 330.0
+        y1: 0.0
+        z1: 330.0
+        x2: 340.0
+        y2: 255.0
+        z2: 340.0
+    # 当完成这一步完成实际上已经完成了两次
+    tip: '&9完成 &9&l任意&9 副本%passcard_current_value%/5次'
+  # ... 后面的省略
+# 当任务已经完成时提示，展示此提示对应变量 %passcard_current_tip%
+tip: '&a任务 %passcard_current_name% 已经完成，使用 &a&l/passcard &a追踪其他任务'

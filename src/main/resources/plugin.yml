@@ -21,7 +21,7 @@ permissions:
     default: true
     description: '查看与玩家相关的帮助'
   passcard.help-op:
-    default: true
+    default: op
     description: '查看所有帮助'
   passcard.reward:
     default: op
@@ -33,6 +33,9 @@ permissions:
       passcard.reward.pro.*:
         default: op
         description: '付费列表'
+  passcard.open:
+    default: true
+    description: '打开个人面板'
   passcard.create:
     default: op
     description: '创建一个任务'

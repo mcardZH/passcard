@@ -12,13 +12,12 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 抽象一个数据库、本地yml文件配置类
@@ -34,12 +33,72 @@ public class SqlYmlConfigurationUtils implements Configuration {
     private final String password;
     private final File configFile;
     private final boolean sqlConfig;
-    private String databaseClass = "com.mysql.jdbc.Driver";
+    private static String databaseClass = "com.mysql.jdbc.Driver";
 
     private YamlConfiguration config;
 
-    public SqlYmlConfigurationUtils(String connectUrl, String user, String password, String configTableName, String selectKey) {
+    /**
+     * @param where 如 where config_name = 'xxx'
+     */
+    public static List<SqlYmlConfigurationUtils> getTableAllConfig(String connectUrl, String user, String password, String configTableName, String where) {
+        return getTableAllConfig(databaseClass, connectUrl, user, password, configTableName, where);
+    }
 
+    /**
+     * @param where 如 where config_name = 'xxx'
+     */
+    public static List<SqlYmlConfigurationUtils> getTableAllConfig(String databaseClass, String connectUrl, String user, String password, String configTableName, String where) {
+        try {
+            Class.forName(databaseClass);
+            Connection connection = DriverManager.getConnection(connectUrl, user, password);
+            Statement statement = connection.createStatement();
+            String sql = LanguageUtils.replace("SELECT config_value FROM %0 %1"
+                    , configTableName, where);
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            List<SqlYmlConfigurationUtils> configList = new ArrayList<>();
+            while (resultSet.next()) {
+                String configValue = resultSet.getString("config_value");
+                configValue = new String(Base64.getMimeDecoder().decode(configValue));
+                StringReader stringReader = new StringReader(configValue);
+                YamlConfiguration config = YamlConfiguration.loadConfiguration(stringReader);
+                String configName = resultSet.getString("config_name");
+                configList.add(new SqlYmlConfigurationUtils(databaseClass, connectUrl, user, password, configTableName, configName));
+            }
+            resultSet.close();
+            statement.close();
+            connection.close();
+            return configList;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public static List<SqlYmlConfigurationUtils> getFolderAllConfiG(File folder) {
+        if (!folder.isDirectory()) {
+            // 只枚举文件夹
+            return new ArrayList<>();
+        }
+        File[] configs = folder.listFiles((dir, name) -> ".yml".equalsIgnoreCase(name.substring(name.length() - 4)));
+        List<SqlYmlConfigurationUtils> result = new ArrayList<>();
+        for (File config : configs) {
+            result.add(new SqlYmlConfigurationUtils(config));
+        }
+        return result;
+    }
+
+    private SqlYmlConfigurationUtils(String databaseClass, String connectUrl, String user, String password, String configTableName, String selectKey, YamlConfiguration config) {
+        this.sqlConfig = true;
+        this.connectUrl = connectUrl;
+        this.configTableName = configTableName;
+        this.selectKey = selectKey;
+        this.user = user;
+        this.password = password;
+        this.configFile = null;
+        this.config = config;
+    }
+
+    public SqlYmlConfigurationUtils(String connectUrl, String user, String password, String configTableName, String selectKey) {
         this.sqlConfig = true;
         this.connectUrl = connectUrl;
         this.configTableName = configTableName;
@@ -54,7 +113,7 @@ public class SqlYmlConfigurationUtils implements Configuration {
     public SqlYmlConfigurationUtils(String databaseClass, String connectUrl, String user, String password, String configTableName, String selectKey) {
 
         this.sqlConfig = true;
-        this.databaseClass = databaseClass;
+        SqlYmlConfigurationUtils.databaseClass = databaseClass;
         this.connectUrl = connectUrl;
         this.configTableName = configTableName;
         this.selectKey = selectKey;
@@ -95,7 +154,7 @@ public class SqlYmlConfigurationUtils implements Configuration {
                 while (resultSet.next()) {
                     configValue = resultSet.getString("config_value");
                 }
-                configValue = configValue.replace("\\n", "\n");
+                configValue = new String(Base64.getMimeDecoder().decode(configValue));
                 StringReader stringReader = new StringReader(configValue);
                 config = YamlConfiguration.loadConfiguration(stringReader);
                 resultSet.close();
@@ -129,16 +188,12 @@ public class SqlYmlConfigurationUtils implements Configuration {
                     sql = LanguageUtils.replace("UPDATE %0 SET config_value = '%2' WHERE config_name = '%1'",
                             configTableName,
                             selectKey,
-                            config.saveToString()
-                                    .replace("\n", "\\n")
-                                    .replace("'", "\\'"));
+                            Base64.getEncoder().encodeToString(config.saveToString().getBytes(StandardCharsets.UTF_8)));
                 } else {
                     sql = LanguageUtils.replace("INSERT INTO %0 (config_name, config_value) VALUES ('%2', '%1')",
                             configTableName,
                             selectKey,
-                            config.saveToString()
-                                    .replace("\n", "\\n")
-                                    .replace("'", "\\'"));
+                            Base64.getEncoder().encodeToString(config.saveToString().getBytes(StandardCharsets.UTF_8)));
                 }
                 statement.execute(sql);
                 resultSet.close();
@@ -157,7 +212,6 @@ public class SqlYmlConfigurationUtils implements Configuration {
     }
 
     /**
-     *
      * @return 默认是com.mysql.jdbc.Driver
      */
     public String getDatabaseClass() {

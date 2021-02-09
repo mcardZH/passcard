@@ -1,0 +1,56 @@
+# 无需在标题设置颜色，提示任务类型
+name: '抽奖1次'
+# 描述内容
+description:
+  - '&9■ &a每天用 金币/点券 抽奖1次'
+  - '&9□ &8使用/cj <jb/dq>抽奖(＾Ｕ＾)ノ~ＹＯ'
+# daily(每日)，weekly(每周)，monthly(每月)；其他值将导致此文件不加载
+type: 'daily'
+
+# 完成条件
+conditions:
+  # 第1步
+  1:
+    # 可以在里面添加1、2、3...这种子层级，表示满足任意之一即可
+    1:
+      # 金钱，前置Vault
+      type: 'VAULT'
+      values:
+        amount: 1000
+        action: 'have'
+    2:
+      # 点券，前置PlayerPoints
+      type: 'PLAYER-POINTS'
+      values:
+        amount: 100
+        action: 'have'
+    tip: '&9使用/cj 抽奖'
+  2:
+    # 执行指令
+    type: 'COMMAND'
+    values:
+      # 命令，无需“/”
+      command-jp: 'cj jb'
+      command-dq: 'cj dq'
+    tip: '&9使用/cj 抽奖'
+  3:
+    # 保持一个容器（界面）打开
+    type: 'OPENED_INVENTORY'
+    values:
+      jp-cj: '&a金币抽奖'
+      dq-cj: '&a点券抽奖'
+  4:
+    # 容器（界面）内物品的操作
+    type: 'INVENTORY_ITEM_ACTION'
+    values:
+      # 点击类型
+      action-type:
+        - 'LEFT'
+      # 有一些action-type可能无需此项
+      # 从上到下依次，第一行为1-9格、第二行为10-18格、第三行为19-27格...
+      slot:
+        - 11
+      # 这个是否是玩家背包中的格子
+      player-backpack: false
+# 当任务已经完成时提示，展示此提示对应变量 %passcard_current_tip%
+tip: '&a任务 %passcard_current_name% 已经完成，使用 &a&l/passcard &a追踪其他任务'

@@ -8,6 +8,9 @@ import vip.onetool.pass.card.conditions.ConditionInterface;
 import java.util.Set;
 import java.util.UUID;
 
+/**
+ * @author mcard
+ */
 public class SeasonPlayer {
 
     private final OfflinePlayer offlinePlayer;
@@ -75,5 +78,9 @@ public class SeasonPlayer {
 
     public Set<ConditionInterface> getConditions() {
         return null;
+    }
+
+    public void openGuiFor() {
+
     }
 }

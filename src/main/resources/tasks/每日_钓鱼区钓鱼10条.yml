@@ -1,0 +1,51 @@
+# 无需在标题设置颜色，提示任务类型
+name: '钓鱼区钓鱼10条'
+# daily(每日)，weekly(每周)，monthly(每月)；其他值将导致此文件不加载
+type: 'daily'
+# 描述内容
+description:
+  - '&9■ &a在服务器主城钓鱼区钓鱼10条'
+  - '&9■ &a必须在钓鱼区钓到“鱼”才行(＾Ｕ＾)ノ~ＹＯ'
+  - '&9■ &a钓到垃圾是不算数的'
+  - '&9□ &8使用/warp fish前往钓鱼区'
+
+# 完成条件
+conditions:
+  # 第1步
+  1:
+    # 具体支持哪些类型请参考wiki
+    # STAY_AT_RANGE 停留在某个区域
+    # 提示：只有在这个区域内才能进行步骤2
+    type: 'STAY-AT-RANGE'
+    values:
+      # 这个key可以按需要定义，可以增加多个区域
+      fish-range:
+        world: 'world'
+        x1: 100.0
+        y1: 0.0
+        z1: 100.0
+        x2: 200.0
+        y2: 255.0
+        z2: 200.0
+    tip: '&9前往主城钓鱼区'
+  # 第2步（要按顺序编号）
+  2:
+    # 具体支持哪些类型请参考wiki
+    # FISH 钓鱼
+    type: 'FISH'
+    values:
+      # 类型
+      type:
+        # 1.12-
+        - 'RAW_FISH'
+        # 1.13+
+        - 'COD'
+        - 'SALMON'
+        - 'TROPICAL_FISH'
+        - 'PUFFERFISH'
+      # 数量
+      amount: 10
+    # 展示此提示对应变量 %passcard_current_tip%
+    tip: '&9钓鱼：%passcard_FISH_today%/10'
+# 当任务已经完成时提示，展示此提示对应变量 %passcard_current_tip%
+tip: '&a任务 %passcard_current_name% 已经完成，使用 &a&l/passcard &a追踪其他任务'

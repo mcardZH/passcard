@@ -129,4 +129,6 @@ command-help:
     only-player: '&6[&3通行证&6]&c本命令仅限玩家执行'
     no-found-player: '&6[&3通行证&6]&c玩家 &c&n%0&c 从未加入过本服务器'
     no-target: '&6[&3通行证&6]&c你目前没用追踪的任务，请使用&c&l/passcard&c选择追踪的任务'
+  open:
+    only-player: '&6[&3通行证&6]&c本命令仅限玩家执行'
   argument-error: '&6[&3通行证&6]&c参数错误，请使用&c&l/passcard help %0&c查看帮助'

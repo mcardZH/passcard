@@ -1,0 +1,23 @@
+# 无需在标题设置颜色，提示任务类型
+name: '花费1000金币'
+# 描述内容
+description:
+  - '&9■ &a抽奖、做任务都可以获得点券'
+# daily(每日)，weekly(每周)，monthly(每月)；其他值将导致此文件不加载
+type: 'daily'
+
+# 完成条件
+conditions:
+  1:
+    # 金币，前置Vault
+    type: 'VAULT'
+    values:
+      # 特别提示，由于Vault未提供监听资金变化的方法
+      # 所以此判定是通过定时检查玩家资金变动实现的。
+      # 不一定十分准确，请知悉
+      action: 'pay'
+      value: 1000
+    tip: '&9已花费 %passcard_current_value%/1000 金币'
+
+# 当任务已经完成时提示，展示此提示对应变量 %passcard_current_tip%
+tip: '&a任务 %passcard_current_name% 已经完成，使用 &a&l/passcard &a追踪其他任务'

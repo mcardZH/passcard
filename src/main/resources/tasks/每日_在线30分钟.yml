@@ -1,0 +1,24 @@
+# 无需在标题设置颜色，提示任务类型
+name: '在线30分钟'
+# 描述内容
+description:
+  - '&9■ &a在服务器里快乐游玩30分钟即可完成此任务'
+# daily(每日)，weekly(每周)，monthly(每月)；其他值将导致此文件不加载
+type: 'daily'
+
+# 完成条件
+conditions:
+  # 第1步
+  1:
+    # 具体支持哪些类型请参考wiki
+    # ONLINE-TIME：累计在线时间
+    type: 'ONLINE-TIME'
+    values:
+      # 格式：1d10h30m24s 1天10小时30分钟24秒
+      time: '30m'
+    # 当进行到这一步的时候提示
+    # 展示此提示对应变量 %passcard_current_tip%
+    tip: '&9累计在线：%passcard_current_value%/30'
+
+# 当任务已经完成时提示，展示此提示对应变量 %passcard_current_tip%
+tip: '&a任务 %passcard_current_name% 已经完成，使用 &a&l/passcard &a追踪其他任务'

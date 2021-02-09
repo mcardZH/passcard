@@ -1,5 +1,8 @@
 package vip.onetool.pass.card.conditions;
 
+/**
+ * @author mcard
+ */
 public interface ConditionInterface {
 
     /**

@@ -1,0 +1,20 @@
+# 无需在标题设置颜色，提示任务类型
+name: '获得100点券'
+# 描述内容
+description:
+  - '&9■ &a抽奖、做任务都可以获得点券'
+# daily(每日)，weekly(每周)，monthly(每月)；其他值将导致此文件不加载
+type: 'daily'
+
+# 完成条件
+conditions:
+  1:
+    # 点券，前置PlayerPoints
+    type: 'PLAYER-POINTS'
+    values:
+      action: 'get'
+      value: 100
+    tip: '&9已获得 %passcard_current_value%/100 点券'
+
+# 当任务已经完成时提示，展示此提示对应变量 %passcard_current_tip%
+tip: '&a任务 %passcard_current_name% 已经完成，使用 &a&l/passcard &a追踪其他任务'

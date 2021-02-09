@@ -1,0 +1,32 @@
+# 无需在标题设置颜色，提示任务类型
+name: '击杀副本Boss2次'
+# daily(每日)，weekly(每周)，monthly(每月)；其他值将导致此文件不加载
+type: 'daily'
+# 描述内容
+description:
+  - '&9■ &a击杀副本 &a&l任意&a Boss2次'
+  # 这只是个模板，服务器可能没有/fb这个命令
+  - '&9□ &8使用/fb查看可加入的副本'
+
+# 完成条件
+conditions:
+  1:
+    # 击杀生物
+    type: 'KILL-MOB'
+    values:
+      boss1:
+        # 如果有颜色代码最好输入，这样也可以防止玩家用命名牌改名
+        # 如果不设置则不限制名称
+        name: '§6[§4BOSS§6]§a生肖——鼠'
+        # 是否精确匹配，如果为true，生物的名称必须和上面设置的完全一致，否则只需要生物名称包含上面的设置即可
+        accurate: true
+        # 生物类型，如果不设置则不限制类型
+        type: 'ZOMBIE'
+      boss2:
+        name: '§6[§4BOSS§6]§a生肖——牛'
+        accurate: true
+        type: 'CREEPER'
+    # %passcard_current_value%是一个特殊的变量，这个变量代表当前进度的值
+    tip: '&9已击杀 %passcard_current_value%/2 次'
+# 当任务已经完成时提示，展示此提示对应变量 %passcard_current_tip%
+tip: '&a任务 %passcard_current_name% 已经完成，使用 &a&l/passcard &a追踪其他任务'
