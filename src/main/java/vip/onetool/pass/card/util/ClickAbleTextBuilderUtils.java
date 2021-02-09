@@ -1,4 +1,4 @@
-package vip.onetool.passcard.utils;
+package vip.onetool.pass.card.util;
 
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
@@ -12,7 +12,7 @@ import java.util.regex.*;
 /**
  * @author mcard
  */
-public class ClickAbleTextBuilder {
+public class ClickAbleTextBuilderUtils {
 
     private static final Pattern patternMatchCommand = Pattern.compile("(/[a-zA-Z0-9 ]+)");
 

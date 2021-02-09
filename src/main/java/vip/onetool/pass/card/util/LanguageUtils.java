@@ -1,4 +1,4 @@
-package vip.onetool.passcard.utils;
+package vip.onetool.pass.card.util;
 
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * @author mcard
  */
-public class Language {
+public class LanguageUtils {
 
     private static String defaultLanguage = "zh_CN";
     private static YamlConfiguration defaultLanguageConfig;
@@ -32,8 +32,8 @@ public class Language {
      * @param fileNames         文件名列表
      */
     public static void init(Plugin plugin, boolean usePlaceholderAPI, boolean debug, String... fileNames) {
-        Language.plugin = plugin;
-        Language.usePlaceholderAPI = usePlaceholderAPI;
+        LanguageUtils.plugin = plugin;
+        LanguageUtils.usePlaceholderAPI = usePlaceholderAPI;
         File languageFolder = new File(plugin.getDataFolder(), "language");
         if (!languageFolder.exists()) {
             languageFolder.mkdirs();
@@ -47,7 +47,7 @@ public class Language {
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") == null) {
             usePlaceholderAPI = false;
         }
-        Language.usePlaceholderAPI = usePlaceholderAPI;
+        LanguageUtils.usePlaceholderAPI = usePlaceholderAPI;
     }
 
     /**
@@ -57,13 +57,13 @@ public class Language {
      * @return 返回false如果文件不存在
      */
     public static boolean setDefaultLanguage(String language) {
-        Language.defaultLanguage = language;
+        LanguageUtils.defaultLanguage = language;
         File languageFolder = new File(plugin.getDataFolder(), "language");
         File languageFile = new File(languageFolder, language + ".yml");
         if (!languageFile.exists()) {
             return false;
         }
-        Language.defaultLanguageConfig = YamlConfiguration.loadConfiguration(languageFile);
+        LanguageUtils.defaultLanguageConfig = YamlConfiguration.loadConfiguration(languageFile);
         return true;
     }
 
@@ -79,13 +79,13 @@ public class Language {
      * @return 返回false如果文件不存在
      */
     public static boolean setLanguage(String language) {
-        Language.language = language;
+        LanguageUtils.language = language;
         File languageFolder = new File(plugin.getDataFolder(), "language");
         File languageFile = new File(languageFolder, language + ".yml");
         if (!languageFile.exists()) {
             return false;
         }
-        Language.languageConfig = YamlConfiguration.loadConfiguration(languageFile);
+        LanguageUtils.languageConfig = YamlConfiguration.loadConfiguration(languageFile);
         return true;
     }
 
@@ -98,7 +98,7 @@ public class Language {
     }
 
     public static void setUsePlaceholderAPI(boolean usePlaceholderAPI) {
-        Language.usePlaceholderAPI = usePlaceholderAPI;
+        LanguageUtils.usePlaceholderAPI = usePlaceholderAPI;
     }
 
     public static boolean isSet(String path) {

@@ -1,4 +1,4 @@
-package vip.onetool.passcard.utils;
+package vip.onetool.pass.card.util;
 
 import org.bukkit.Color;
 import org.bukkit.OfflinePlayer;
@@ -25,7 +25,7 @@ import java.util.Set;
  *
  * @author mcard
  */
-public class SqlYmlConfiguration implements Configuration {
+public class SqlYmlConfigurationUtils implements Configuration {
 
     private final String connectUrl;
     private final String configTableName;
@@ -38,7 +38,7 @@ public class SqlYmlConfiguration implements Configuration {
 
     private YamlConfiguration config;
 
-    public SqlYmlConfiguration(String connectUrl, String user, String password, String configTableName, String selectKey) {
+    public SqlYmlConfigurationUtils(String connectUrl, String user, String password, String configTableName, String selectKey) {
 
         this.sqlConfig = true;
         this.connectUrl = connectUrl;
@@ -51,7 +51,7 @@ public class SqlYmlConfiguration implements Configuration {
         this.reload();
     }
 
-    public SqlYmlConfiguration(String databaseClass, String connectUrl, String user, String password, String configTableName, String selectKey) {
+    public SqlYmlConfigurationUtils(String databaseClass, String connectUrl, String user, String password, String configTableName, String selectKey) {
 
         this.sqlConfig = true;
         this.databaseClass = databaseClass;
@@ -65,7 +65,7 @@ public class SqlYmlConfiguration implements Configuration {
         this.reload();
     }
 
-    public SqlYmlConfiguration(File configFile) {
+    public SqlYmlConfigurationUtils(File configFile) {
         this.sqlConfig = false;
         this.connectUrl = "";
         this.configTableName = "";
@@ -88,7 +88,7 @@ public class SqlYmlConfiguration implements Configuration {
                 Class.forName(databaseClass);
                 Connection connection = DriverManager.getConnection(connectUrl, user, password);
                 Statement statement = connection.createStatement();
-                String sql = Language.replace("SELECT config_value FROM %0 WHERE config_name = '%1'"
+                String sql = LanguageUtils.replace("SELECT config_value FROM %0 WHERE config_name = '%1'"
                         , configTableName, selectKey);
                 ResultSet resultSet = statement.executeQuery(sql);
                 String configValue = "";
@@ -118,7 +118,7 @@ public class SqlYmlConfiguration implements Configuration {
                 Class.forName(databaseClass);
                 Connection connection = DriverManager.getConnection(connectUrl, user, password);
                 Statement statement = connection.createStatement();
-                String sql = Language.replace("SELECT config_value FROM %0 WHERE config_name = '%1'"
+                String sql = LanguageUtils.replace("SELECT config_value FROM %0 WHERE config_name = '%1'"
                         , configTableName, selectKey);
                 ResultSet resultSet = statement.executeQuery(sql);
                 boolean find = false;
@@ -126,14 +126,14 @@ public class SqlYmlConfiguration implements Configuration {
                     find = true;
                 }
                 if (find) {
-                    sql = Language.replace("UPDATE %0 SET config_value = '%2' WHERE config_name = '%1'",
+                    sql = LanguageUtils.replace("UPDATE %0 SET config_value = '%2' WHERE config_name = '%1'",
                             configTableName,
                             selectKey,
                             config.saveToString()
                                     .replace("\n", "\\n")
                                     .replace("'", "\\'"));
                 } else {
-                    sql = Language.replace("INSERT INTO %0 (config_name, config_value) VALUES ('%2', '%1')",
+                    sql = LanguageUtils.replace("INSERT INTO %0 (config_name, config_value) VALUES ('%2', '%1')",
                             configTableName,
                             selectKey,
                             config.saveToString()

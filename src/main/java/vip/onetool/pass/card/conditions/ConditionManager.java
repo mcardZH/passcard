@@ -1,4 +1,4 @@
-package vip.onetool.passcard.conditions;
+package vip.onetool.pass.card.conditions;
 
 import org.bukkit.entity.Player;
 

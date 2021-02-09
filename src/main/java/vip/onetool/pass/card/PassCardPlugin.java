@@ -1,19 +1,19 @@
-package vip.onetool.passcard;
+package vip.onetool.pass.card;
 
 
 import org.bukkit.plugin.java.JavaPlugin;
-import vip.onetool.passcard.utils.CommandManager;
-import vip.onetool.passcard.utils.Language;
+import vip.onetool.pass.card.util.CommandManagerUtils;
+import vip.onetool.pass.card.util.LanguageUtils;
 
 
 public final class PassCardPlugin extends JavaPlugin {
 
-    private CommandManager passCardCommand;
+    private CommandManagerUtils passCardCommand;
 
     @Override
     public void onEnable() {
-        Language.init(this, true, true, "zh_CN.yml");
-        passCardCommand = CommandManager.createCommandManager("passcard");
+        LanguageUtils.init(this, true, true, "zh_CN.yml");
+        passCardCommand = CommandManagerUtils.createCommandManager("passcard");
 
     }
 

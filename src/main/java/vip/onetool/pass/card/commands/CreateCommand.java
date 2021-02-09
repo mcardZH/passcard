@@ -1,20 +1,19 @@
-package vip.onetool.passcard.commands;
+package vip.onetool.pass.card.commands;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
-import org.bukkit.entity.Player;
-import vip.onetool.passcard.conditions.ConditionManager;
-import vip.onetool.passcard.utils.ClickAbleTextBuilder;
-import vip.onetool.passcard.utils.Language;
+import vip.onetool.pass.card.conditions.ConditionManager;
+import vip.onetool.pass.card.util.ClickAbleTextBuilderUtils;
+import vip.onetool.pass.card.util.LanguageUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-public class EditCommand implements TabExecutor {
-
-    private final String permission = "passcard.edit";
+/**
+ * @author mcard
+ */
+public class CreateCommand implements TabExecutor {
 
     /**
      * Executes the given command, returning its success
@@ -27,30 +26,30 @@ public class EditCommand implements TabExecutor {
      */
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        String permission = "passcard.create";
         String argumentError = "command-help.argument-error";
-        String nameNotExist = "command-help.edit.name-not-exist";
-        String onlyPlayer = "command-help.edit.only-player";
+        String nameExist = "command-help.create.name-exist";
+        String createResult = "command-help.create.create-result";
         if (!sender.hasPermission(permission)) {
             return false;
         }
-        if (!(sender instanceof Player)) {
-            sender.sendMessage(Language.get(onlyPlayer, null));
-            return true;
-        }
-        Player player = ((Player) sender);
         if (args.length != 1) {
             //虽然参数超过1个也可以运行不会有问题，但为了严谨仅支持1个参数
-            ClickAbleTextBuilder.send(sender, ClickAbleTextBuilder.fastBuildClickAbleCommand(
-                    Language.get(argumentError, null, "create")));
+            ClickAbleTextBuilderUtils.send(sender, ClickAbleTextBuilderUtils.fastBuildClickAbleCommand(
+                    LanguageUtils.get(argumentError, null, "create")));
             return true;
         }
         String name = args[0];
-        if (!ConditionManager.isConditionNameExist(name)) {
-            ClickAbleTextBuilder.send(sender, ClickAbleTextBuilder.fastBuildClickAbleCommand(
-                    Language.get(nameNotExist, null, name)));
+        if (ConditionManager.isConditionNameExist(name)) {
+            ClickAbleTextBuilderUtils.send(sender, ClickAbleTextBuilderUtils.fastBuildClickAbleCommand(
+                    LanguageUtils.get(nameExist, null, name)));
             return true;
         }
-        ConditionManager.openEditGui(player, name);
+        if (ConditionManager.createCondition(name)) {
+            sender.sendMessage(LanguageUtils.get(createResult, null, "成功"));
+        } else {
+            sender.sendMessage(LanguageUtils.get(createResult, null, "失败"));
+        }
         return true;
     }
 
@@ -69,9 +68,7 @@ public class EditCommand implements TabExecutor {
      */
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-        if (!sender.hasPermission(permission)) {
-            return new ArrayList<>();
-        }
-        return Arrays.asList(ConditionManager.getConditionNameList().toArray(new String[0]));
+        // 本命令无需补全
+        return new ArrayList<>();
     }
 }

@@ -15,7 +15,8 @@ command-help:
       - '&6[&3通行证&6]&9&l/passcard delete &1<任务名>&2删除一个任务'
       - '&6[&3通行证&6]&9&l/passcard start &1<新赛季名>&2慎用！请确保已经完成新赛季配置。未领取的奖励将无法再领取。'
       - '&6[&3通行证&6]&9&l/passcard new &1<新赛季名>&2创建一个新赛季或进入赛季编辑'
-      - '&6[&3通行证&6]&9&l/passcard level <add|reduce|set> &1<玩家名> <xp|level> <值>&2增加、减少和设置一个玩家的经验或等级'
+      - '&6[&3通行证&6]&9&l/passcard level &1<add|reduce|set> <玩家名> <xp|level> <值>&2增加、减少和设置一个玩家的经验或等级'
+      - '&6[&3通行证&6]&9&l/passcard level &1[玩家名]&2查看一个玩家的等级'
       - '&6[&3通行证&6]&9&l/passcard jump&2跳过当前追踪的任务，重新获取一个新的'
       - '&6[&3通行证&6]&9&l/passcard done&2立即完成当前追踪的任务'
       - '&9&l==========&6[&3通行证管理员帮助&6]&9&l=========='
@@ -114,4 +115,18 @@ command-help:
     name-not-exist: '&6[&3通行证&6]&c赛季 &c&n%0&c 不存在，请检查输入'
     confirm-tip: '&6[&3通行证&6]&a请在 &a&l%0 &a秒内重新输入 &a&l%1 &a确认开启新赛季'
     contain-data: '&6[&3通行证&6]&c警告！赛季 &c&n%0&c 存在数据，可能此赛季已经开始过'
+  level:
+    no-found-player: '&6[&3通行证&6]&c玩家 &c&n%0&c 从未加入过本服务器'
+    level-info: '&6[&3通行证&6]&a玩家 &9&n%0&a 的等级为 &9&l%1'
+    need-integer: '&6[&3通行证&6]&a参数&9<值>&a必须是一个&9&n整数'
+  jump:
+    only-player: '&6[&3通行证&6]&c本命令仅限玩家执行'
+    no-found-player: '&6[&3通行证&6]&c玩家 &c&n%0&c 从未加入过本服务器'
+    no-target: '&6[&3通行证&6]&c你目前没用追踪的任务，请使用&c&l/passcard&c选择追踪的任务'
+  new:
+    only-player: '&6[&3通行证&6]&c本命令仅限玩家执行'
+  done:
+    only-player: '&6[&3通行证&6]&c本命令仅限玩家执行'
+    no-found-player: '&6[&3通行证&6]&c玩家 &c&n%0&c 从未加入过本服务器'
+    no-target: '&6[&3通行证&6]&c你目前没用追踪的任务，请使用&c&l/passcard&c选择追踪的任务'
   argument-error: '&6[&3通行证&6]&c参数错误，请使用&c&l/passcard help %0&c查看帮助'

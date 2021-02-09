@@ -1,19 +1,21 @@
-package vip.onetool.passcard.commands;
+package vip.onetool.pass.card.commands;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
-import vip.onetool.passcard.conditions.ConditionManager;
-import vip.onetool.passcard.utils.ClickAbleTextBuilder;
-import vip.onetool.passcard.utils.Language;
+import vip.onetool.pass.card.seasons.SeasonManager;
+import vip.onetool.pass.card.seasons.SeasonPlayer;
+import vip.onetool.pass.card.util.ClickAbleTextBuilderUtils;
+import vip.onetool.pass.card.util.LanguageUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-public class DeleteCommand implements TabExecutor {
-    private final String permission = "passcard.delete";
+/**
+ * @author mcard
+ */
+public class JumpCommand implements TabExecutor {
     /**
      * Executes the given command, returning its success
      *
@@ -25,24 +27,27 @@ public class DeleteCommand implements TabExecutor {
      */
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        String argumentError = "command-help.argument-error";
-        String nameNotExist = "command-help.delete.name-not-exist";
-        if (!sender.hasPermission(permission)) {
+        String onlyPlayer = "command-help.jump.only-player";
+        String noTarget = "command-help.jump.no-target";
+        String permission = "passcard.finish.jump";
+        if (sender.hasPermission(permission)) {
+            // 没权限跳过任务
             return false;
         }
-        if (args.length != 1) {
-            //虽然参数超过1个也可以运行不会有问题，但为了严谨仅支持1个参数
-            ClickAbleTextBuilder.send(sender, ClickAbleTextBuilder.fastBuildClickAbleCommand(
-                    Language.get(argumentError, null, "create")));
+        if (!(sender instanceof Player)) {
+            sender.sendMessage(LanguageUtils.get(onlyPlayer, null));
             return true;
         }
-        String name = args[0];
-        if (!ConditionManager.isConditionNameExist(name)) {
-            ClickAbleTextBuilder.send(sender, ClickAbleTextBuilder.fastBuildClickAbleCommand(
-                    Language.get(nameNotExist, null, name)));
+        SeasonPlayer player = SeasonManager.getPlayer(sender.getName());
+        // 自己会不存在？
+        assert player != null;
+        if (!player.hasTargetCondition()) {
+            ClickAbleTextBuilderUtils.send(sender, ClickAbleTextBuilderUtils.fastBuildClickAbleCommand(
+                    LanguageUtils.get(noTarget, null)
+            ));
             return true;
         }
-        ConditionManager.saveDeleteCondition(name);
+        player.getTargetCondition().jump();
         return true;
     }
 
@@ -61,9 +66,6 @@ public class DeleteCommand implements TabExecutor {
      */
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-        if (!sender.hasPermission(permission)) {
-            return new ArrayList<>();
-        }
-        return Arrays.asList(ConditionManager.getConditionNameList().toArray(new String[0]));
+        return new ArrayList<>();
     }
 }

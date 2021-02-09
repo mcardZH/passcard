@@ -1,4 +1,4 @@
-package vip.onetool.passcard.utils;
+package vip.onetool.pass.card.util;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.*;
@@ -8,17 +8,17 @@ import java.util.*;
 /**
  * @author mcard
  */
-public class CommandManager implements TabExecutor {
+public class CommandManagerUtils implements TabExecutor {
 
     /**
      * @param command 要注册的命令
      * @return 如果命令不存在返回null
      */
-    public static CommandManager createCommandManager(String command) {
+    public static CommandManagerUtils createCommandManager(String command) {
         if (Bukkit.getPluginCommand(command) == null) {
             return null;
         }
-        return new CommandManager(command);
+        return new CommandManagerUtils(command);
     }
 
     private final String command;
@@ -27,7 +27,7 @@ public class CommandManager implements TabExecutor {
     private final Map<String, TabExecutor> handlers = new HashMap<>();
     private String defaultHandlerName = null;
 
-    private CommandManager(String command) {
+    private CommandManagerUtils(String command) {
         this.command = command;
         this.defaultExecutor = Bukkit.getPluginCommand(command).getExecutor();
         this.defaultTabCompleter = Bukkit.getPluginCommand(command).getTabCompleter();

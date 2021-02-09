@@ -1,6 +1,6 @@
 name: PassCard
 version: ${project.version}
-main: vip.onetool.passcard.PassCardPlugin
+main: vip.onetool.pass.card.PassCardPlugin
 load: STARTUP
 softdepend:
   - PlaceholderAPI
