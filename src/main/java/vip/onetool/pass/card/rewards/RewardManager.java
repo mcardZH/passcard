@@ -5,8 +5,15 @@ package vip.onetool.pass.card.rewards;
  */
 public class RewardManager {
 
-
     private RewardManager() {
+
+    }
+
+    public static void init() {
+
+    }
+
+    public static void uninit() {
 
     }
 

@@ -135,4 +135,16 @@ command-help:
 
 init-help:
   error:
-    task-type-error: '&c警告！配置 &c&n%0&c 存在无效的 &c&ntype&c %1'
+    task-type-error: '&c警告！配置 &c&n%0&c 存在无效的 type &c&n%1'
+    reward-config-error: '&c警告！无法给玩家 %0 发放奖励，因为存在无效的 reward 配置 &c&n%1'
+
+reward:
+  item:
+    detail-item-stack:
+      default:
+        type: 'GRASS'
+        amount: 1
+        damage: 0
+        name: '&8<<< &a点击编辑'
+        lore:
+          - '&2 '

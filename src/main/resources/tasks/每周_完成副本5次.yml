@@ -44,7 +44,7 @@ conditions:
     tip: '&9完成 &9&l任意&9 副本0/5次'
   2:
     # 离开区域
-    type: 'LEAVE_RANGE'
+    type: 'LEAVE-RANGE'
     values:
       dungeon1:
         world: 'world'
@@ -86,7 +86,7 @@ conditions:
     tip: '&9完成 &9&l任意&9 副本1/5次'
   4:
     # 离开区域
-    type: 'LEAVE_RANGE'
+    type: 'LEAVE-RANGE'
     values:
       dungeon1:
         world: 'world'

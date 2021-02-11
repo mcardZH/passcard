@@ -11,6 +11,11 @@ public class Season {
 
     }
 
+    /**
+     * 打开编辑器
+     *
+     * @param player 玩家
+     */
     public void editFor(Player player) {
 
     }

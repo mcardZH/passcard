@@ -1,5 +1,6 @@
 package vip.onetool.pass.card.rewards;
 
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import vip.onetool.pass.card.seasons.SeasonPlayer;
@@ -9,7 +10,7 @@ import java.util.List;
 /**
  * @author mcard
  */
-public interface RewardInterface {
+public class ItemReward implements RewardInterface {
 
     /**
      * 获取用于描述的物品
@@ -17,14 +18,20 @@ public interface RewardInterface {
      * @param config 当前配置
      * @return 物品
      */
-    ItemStack getDetailItemStack(Object config);
+    @Override
+    public ItemStack getDetailItemStack(Object config) {
+        return null;
+    }
 
     /**
      * 获取编辑模板
      *
      * @return 模板类型
      */
-    RewardTypeEnum getRewardEditType();
+    @Override
+    public RewardTypeEnum getRewardEditType() {
+        return null;
+    }
 
     /**
      * 获取编辑帮助
@@ -36,7 +43,10 @@ public interface RewardInterface {
      * @param player 谁获取这个帮助
      * @return 帮助内容
      */
-    List<String> getEditHelp(Player player);
+    @Override
+    public List<String> getEditHelp(Player player) {
+        return null;
+    }
 
     /**
      * 检查编辑状态
@@ -49,7 +59,10 @@ public interface RewardInterface {
      * @param config 当前的配置（可能是{@link String}、{@link List<String>}、{@link ItemStack}和{@link List<ItemStack>}）
      * @return 返回null代表编辑无效，其他情况请返回格式化后的配置内容（如String转换为int）
      */
-    Object editDone(Player player, Object config);
+    @Override
+    public Object editDone(Player player, Object config) {
+        return null;
+    }
 
     /**
      * 开始编辑
@@ -59,25 +72,32 @@ public interface RewardInterface {
      * @param nowConfig 旧的配置
      * @param callback  回调，<b>务必</b>把新的config和修改结果传递到这里
      */
-    void editFor(Player player, Object nowConfig, RewardEditFinishInterface callback);
+    @Override
+    public void editFor(Player player, Object nowConfig, RewardEditFinishInterface callback) {
+
+    }
 
     /**
      * 注册的类型名称
      *
      * @return 名称
      */
-    String getTypeName();
+    @Override
+    public String getTypeName() {
+        return null;
+    }
 
     /**
      * 执行奖励方案
      * <p>
-     * 此时<b>一定</b>可以获得{@link org.bukkit.entity.Player}对象
+     * 此时<b>一定</b>可以获得{@link Player}对象
      * </p>
      *
      * @param player 玩家
-     * @param config 根据自身情况可能是{@link Integer}、{@link String}或者{@link org.bukkit.configuration.ConfigurationSection}等等
+     * @param config 根据自身情况可能是{@link Integer}、{@link String}或者{@link ConfigurationSection}等等
      */
-    void run(SeasonPlayer player, Object config);
+    @Override
+    public void run(SeasonPlayer player, Object config) {
 
-
+    }
 }

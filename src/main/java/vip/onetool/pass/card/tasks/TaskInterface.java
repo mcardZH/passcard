@@ -87,4 +87,11 @@ public interface TaskInterface {
      */
     void save();
 
+    /**
+     * 获取配置文件
+     *
+     * @return 配置
+     */
+    SqlYmlConfigurationUtils getConfig();
+
 }

@@ -82,4 +82,8 @@ public class TaskManager {
         task.save();
         tasks.remove(task.getName());
     }
+
+    public static PlayerTask createPlayerTask() {
+        return null;
+    }
 }

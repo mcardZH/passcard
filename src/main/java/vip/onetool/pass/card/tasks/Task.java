@@ -65,6 +65,10 @@ public class Task implements TaskInterface {
         }
     }
 
+    Task(TaskInterface task) throws TaskTypeUnknownException, TaskConditionKeyErrorException {
+        this(task.getConfig());
+    }
+
     /**
      * 获取任务名称
      *
@@ -167,6 +171,16 @@ public class Task implements TaskInterface {
     @Override
     public void save() {
         config.save();
+    }
+
+    /**
+     * 获取配置文件
+     *
+     * @return 配置
+     */
+    @Override
+    public SqlYmlConfigurationUtils getConfig() {
+        return config;
     }
 
     @Override

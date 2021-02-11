@@ -21,7 +21,7 @@ public class PlayerTask extends Task implements PlayerTaskInterface {
     private int nowStep = 1;
     private boolean isFinish = false;
 
-    public PlayerTask(SqlYmlConfigurationUtils config, Date startTime, SeasonPlayer seasonPlayer) throws TaskTypeUnknownException, TaskConditionKeyErrorException {
+    PlayerTask(SqlYmlConfigurationUtils config, Date startTime, SeasonPlayer seasonPlayer) throws TaskTypeUnknownException, TaskConditionKeyErrorException {
         super(config);
         this.startTime = startTime;
         this.seasonPlayer = seasonPlayer;
@@ -44,6 +44,22 @@ public class PlayerTask extends Task implements PlayerTaskInterface {
             }
             this.playerTaskSteps.put(stepIndex, playerTaskStepInterfaces);
         }
+    }
+
+    PlayerTask(TaskInterface taskInterface, Date startTime, SeasonPlayer seasonPlayer) throws TaskTypeUnknownException, TaskConditionKeyErrorException {
+        super(taskInterface);
+        this.startTime = startTime;
+        this.seasonPlayer = seasonPlayer;
+        this.lastTypeCache = getType();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(this.startTime);
+        // 回到当天0点
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.HOUR, 0);
+        // 往后调整时间
+        calendar.add(Calendar.DATE, this.getType().getDays());
+        this.endTime = calendar.getTime();
     }
 
     /**

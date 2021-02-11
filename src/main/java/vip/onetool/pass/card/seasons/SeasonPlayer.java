@@ -52,7 +52,7 @@ public class SeasonPlayer {
      *
      * @return 玩家等级
      */
-    public SeasonLevel getPlayerLevel() {
+    public PlayerSeasonLevel getPlayerLevel() {
         return null;
     }
 

@@ -10,7 +10,8 @@ end-time: '2022/02/22'
 # * 代表所有
 load-list: '*'
 # 也可以单独加载
-#  - 'demo_task.yml'
+#  注意，不需要后缀
+#  - 'demo_task'
 
 # 每天完成限制
 limit:
@@ -52,7 +53,7 @@ reward-list:
         unbreakable: false
       # 奖励内容
       reward:
-        # 金钱，前置Value
+        # 金钱，前置Vault
         money: 1000
         # 物品，无需前置
         item:

@@ -3,7 +3,7 @@ package vip.onetool.pass.card.commands;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
-import vip.onetool.pass.card.seasons.SeasonLevel;
+import vip.onetool.pass.card.seasons.PlayerSeasonLevel;
 import vip.onetool.pass.card.seasons.SeasonManager;
 import vip.onetool.pass.card.seasons.SeasonPlayer;
 import vip.onetool.pass.card.util.ClickAbleTextBuilderUtils;
@@ -96,7 +96,7 @@ public class LevelCommand implements TabExecutor {
             // 使用反射调用修改方法
             // 合成setLevel一类方法名
             String methodName = action.toLowerCase() + target.substring(0, 1).toUpperCase() + target.substring(1).toLowerCase();
-            Class<? extends SeasonLevel> clazz = player.getPlayerLevel().getClass();
+            Class<? extends PlayerSeasonLevel> clazz = player.getPlayerLevel().getClass();
             try {
                 Method method = clazz.getDeclaredMethod(methodName, Integer.class);
                 method.invoke(player.getPlayerLevel(), value);
