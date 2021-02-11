@@ -14,4 +14,11 @@ public interface ConditionInterface {
      * 完成当前任务
      */
     void done();
+
+    /**
+     * 进行一次检测
+     *
+     * @return 返回是否已经完成
+     */
+    boolean run();
 }

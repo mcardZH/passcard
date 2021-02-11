@@ -9,19 +9,11 @@ import java.util.Set;
 
 /**
  * @author mcard
- * TODO: 完成此类
  */
 public class ConditionManager {
 
-    private static boolean inited = false;
-
     public static void init(List<SqlYmlConfigurationUtils> config) {
-        inited = true;
 
-    }
-
-    public static void unInit() {
-        inited = false;
     }
 
     public static Set<String> getConditionNameList() {

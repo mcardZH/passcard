@@ -12,6 +12,15 @@ load-list: '*'
 # 也可以单独加载
 #  - 'demo_task.yml'
 
+# 每天完成限制
+limit:
+  # 每日任务完成限制（每天24点刷新）
+  daily: 3
+  # 每周任务（每周日24点刷新）
+  weekly: 3
+  # 每月任务（每月1号0点刷新）
+  monthly: 3
+
 # 奖励列表
 reward-list:
   # 等级1

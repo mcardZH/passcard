@@ -5,15 +5,9 @@ package vip.onetool.pass.card.rewards;
  */
 public class RewardManager {
 
-    private static boolean inited = false;
 
-    public static void init() {
-        inited = true;
+    private RewardManager() {
 
-    }
-
-    public static void unInit() {
-        inited = false;
     }
 
 }

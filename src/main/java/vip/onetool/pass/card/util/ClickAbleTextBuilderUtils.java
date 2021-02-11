@@ -5,9 +5,9 @@ import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
-import java.util.regex.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author mcard
@@ -38,12 +38,7 @@ public class ClickAbleTextBuilderUtils {
 
 
     public static void send(CommandSender sender, TextComponent str) {
-        //如果是玩家展示更加丰富的文本内容，否则仅展示文本
-        if (sender instanceof Player) {
-            ((Player) sender).spigot().sendMessage(str);
-        } else {
-            sender.sendMessage(str.getText());
-        }
+        sender.spigot().sendMessage(str);
     }
 
 }

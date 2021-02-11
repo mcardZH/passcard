@@ -38,13 +38,13 @@ public class DoneCommand implements TabExecutor {
         SeasonPlayer player = SeasonManager.getPlayer(sender.getName());
         // 自己会不存在？
         assert player != null;
-        if (!player.hasTargetCondition()) {
+        if (!player.hasTargetTask()) {
             ClickAbleTextBuilderUtils.send(sender, ClickAbleTextBuilderUtils.fastBuildClickAbleCommand(
                     LanguageUtils.get(noTarget, null)
             ));
             return true;
         }
-        player.getTargetCondition().done();
+        player.getTargetTask().done();
         return true;
     }
 

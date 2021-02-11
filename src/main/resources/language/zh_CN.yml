@@ -132,3 +132,7 @@ command-help:
   open:
     only-player: '&6[&3通行证&6]&c本命令仅限玩家执行'
   argument-error: '&6[&3通行证&6]&c参数错误，请使用&c&l/passcard help %0&c查看帮助'
+
+init-help:
+  error:
+    task-type-error: '&c警告！配置 &c&n%0&c 存在无效的 &c&ntype&c %1'

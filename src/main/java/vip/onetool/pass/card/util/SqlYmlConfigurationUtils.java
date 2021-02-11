@@ -11,7 +11,9 @@ import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.StringReader;
 import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -74,7 +76,7 @@ public class SqlYmlConfigurationUtils implements Configuration {
         }
     }
 
-    public static List<SqlYmlConfigurationUtils> getFolderAllConfiG(File folder) {
+    public static List<SqlYmlConfigurationUtils> getFolderAllConfig(File folder) {
         if (!folder.isDirectory()) {
             // 只枚举文件夹
             return new ArrayList<>();
@@ -134,6 +136,14 @@ public class SqlYmlConfigurationUtils implements Configuration {
         this.configFile = configFile;
 
         this.reload();
+    }
+
+    public String getType() {
+        if (this.sqlConfig) {
+            return this.configTableName + "|" + this.selectKey;
+        } else {
+            return this.configFile.getName();
+        }
     }
 
     /**

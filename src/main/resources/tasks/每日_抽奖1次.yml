@@ -35,13 +35,13 @@ conditions:
     tip: '&9使用/cj 抽奖'
   3:
     # 保持一个容器（界面）打开
-    type: 'OPENED_INVENTORY'
+    type: 'OPENED-INVENTORY'
     values:
       jp-cj: '&a金币抽奖'
       dq-cj: '&a点券抽奖'
   4:
     # 容器（界面）内物品的操作
-    type: 'INVENTORY_ITEM_ACTION'
+    type: 'INVENTORY-ITEM-ACTION'
     values:
       # 点击类型
       action-type:

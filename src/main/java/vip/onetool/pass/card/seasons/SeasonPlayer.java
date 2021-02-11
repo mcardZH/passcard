@@ -3,7 +3,7 @@ package vip.onetool.pass.card.seasons;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
-import vip.onetool.pass.card.conditions.ConditionInterface;
+import vip.onetool.pass.card.tasks.PlayerTaskInterface;
 
 import java.util.Set;
 import java.util.UUID;
@@ -60,7 +60,7 @@ public class SeasonPlayer {
         return this.name;
     }
 
-    public boolean hasTargetCondition() {
+    public boolean hasTargetTask() {
         return false;
     }
 
@@ -69,16 +69,17 @@ public class SeasonPlayer {
      *
      * @return 玩家追踪的任务
      */
-    public ConditionInterface getTargetCondition() {
-        if (hasTargetCondition()) {
+    public PlayerTaskInterface getTargetTask() {
+        if (hasTargetTask()) {
             return null;
         }
         return null;
     }
 
-    public Set<ConditionInterface> getConditions() {
+    public Set<PlayerTaskInterface> getTasks() {
         return null;
     }
+
 
     public void openGuiFor() {
 
