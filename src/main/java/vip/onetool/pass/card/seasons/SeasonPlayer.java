@@ -14,10 +14,12 @@ import java.util.UUID;
 public class SeasonPlayer {
 
     private final OfflinePlayer offlinePlayer;
+    private final UUID uniqueId;
     private final String name;
 
     SeasonPlayer(UUID uniqueId, String name) {
         this.offlinePlayer = Bukkit.getOfflinePlayer(uniqueId);
+        this.uniqueId = uniqueId;
         this.name = name;
     }
 
@@ -33,6 +35,15 @@ public class SeasonPlayer {
             return null;
         }
         return this.offlinePlayer;
+    }
+
+    /**
+     * 获取玩家的UUID
+     *
+     * @return 玩家的UUID
+     */
+    public UUID getUniqueId() {
+        return uniqueId;
     }
 
     /**

@@ -5,7 +5,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import vip.onetool.pass.card.commands.*;
 import vip.onetool.pass.card.util.CommandManagerUtils;
 import vip.onetool.pass.card.util.LanguageUtils;
-import vip.onetool.pass.card.util.SqlYmlConfigurationUtils;
 
 import java.io.File;
 
@@ -76,7 +75,7 @@ public final class PassCardPlugin extends JavaPlugin {
             String prefix = getConfig().getString("database.prefix");
             String tableTask = table + "tasks";
 
-            SqlYmlConfigurationUtils.getTableAllConfig(clazz, )
+            //SqlYmlConfigurationUtils.getTableAllConfig(clazz, )
         } else {
 
         }

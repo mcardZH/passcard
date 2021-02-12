@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -97,8 +98,8 @@ public class LanguageUtils {
         return usePlaceholderAPI;
     }
 
-    public static void setUsePlaceholderAPI(boolean usePlaceholderAPI) {
-        LanguageUtils.usePlaceholderAPI = usePlaceholderAPI;
+    public static void setUsePlaceholderAPI(boolean usePlaceholderApi) {
+        LanguageUtils.usePlaceholderAPI = usePlaceholderApi;
     }
 
     public static boolean isSet(String path) {
@@ -140,10 +141,13 @@ public class LanguageUtils {
                 break;
             }
             String tempStr = temp.get(i);
-            if (replace[i] instanceof List) {
+            if (replace[i] instanceof ArrayList) {
                 try {
                     //如果是list则逐个替换
-                    List<String> tempList = (List<String>) replace[i];
+                    List<String> tempList = new ArrayList<>();
+                    for (Object o : (List<?>) replace[i]) {
+                        tempList.add(String.valueOf(o));
+                    }
                     for (int m = 0; m < tempList.size(); m++) {
                         tempStr = tempStr.replace("%" + m, tempList.get(m));
                     }

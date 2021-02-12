@@ -141,10 +141,33 @@ init-help:
 reward:
   item:
     detail-item-stack:
-      default:
-        type: 'GRASS'
-        amount: 1
-        damage: 0
-        name: '&8<<< &a点击编辑'
-        lore:
-          - '&2 '
+      default-name: '&8<<< &a点击编辑物品'
+    item-type-error: '&c警告！配置的物品类型 &c&n%0&c 不存在，已经使用默认的物品代替'
+    enchantment-type-error: '&c警告！配置的附魔类型 &c&n%0&c 不存在。'
+    more-item: '  &a等 &2&n%0&a 个物品'
+    help:
+      - '&a请把要作为奖励的物品放在这里面'
+  command:
+    detail-item-stack:
+      default-name: '&8<<< &a点击编辑命令'
+    total: '&a总共 %0 行'
+    help:
+      - '&a请输入要奖励的指令，支持PlaceholderAPI'
+      - '&a无需输入&c&l/&a，直接输入命令内容即可'
+      - '&a变量 &b&n<player>&a 可替换玩家名称'
+  player-points:
+    detail-item-stack:
+      default-name: '&6%0 &8<<< &a点击编辑奖励点券数量'
+      wait: '等待编辑'
+    help:
+      - '&a请输入一个【整数】值作为点券奖励值'
+    depend-plugin-no-found: '&c前置插件PlayerPoints未找到，无法执行奖励方案'
+    config-error: '&c配置错误 &c&n%0&c 无法转换为整数'
+  vault:
+    detail-item-stack:
+      default-name: '&6%0 &8<<< &a点击编辑奖励金钱数量'
+      wait: '等待编辑'
+    help:
+      - '&a请输入一个【数值】值作为金钱奖励值'
+    depend-plugin-no-found: '&c前置插件Vault未找到，无法执行奖励方案'
+    config-error: '&c配置错误 &c&n%0&c 无法转换为数值'
